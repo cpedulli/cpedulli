@@ -1,0 +1,91 @@
+<style> .Dostuff {top:100px; left:100px;width:200px;height:200px;background-color:green; color: white; text-align: center; vertical-align: center} </style>
+<div id="christian" class = "Dostuff" >Drink Milk</div>
+
+<script>
+var red = 0
+var green = 0
+var blue = 0
+function makeItBlue() {
+
+	var myBox = document.getElementById("christian")
+
+	
+	myBox.style.backgroundColor = rgbToHex(red)+rgbToHex(green)+rgbToHex(blue);
+	
+	if (red < 255){
+	red++;
+	}
+	
+	else if (green < 255){
+	green++;
+	}
+	
+	else if (blue < 255){
+	blue++;
+	}
+	
+	else {
+	blue = 0
+	green = 0
+	red = 0
+	}
+	
+	//console.log (rgbToHex(red))
+}
+
+
+window.setInterval(makeItBlue, 20)
+
+var rgbToHex = function (rgb) { 
+  var hex = Number(rgb).toString(16);
+  if (hex.length < 2) {
+       hex = "0" + hex;
+  }
+  return hex;
+};
+
+
+
+function changeboxcolor(el){
+var color = document.getElementById("color")
+var r = document.getElementById("red")
+var g = document.getElementById("green")
+var b = document.getElementById("blue")
+color.style.backgroundColor = rgbToHex(r.value)+rgbToHex(g.value)+rgbToHex(b.value);
+}
+
+
+
+
+</script>
+
+<div id = "color" class= "Dostuff"></div>
+<span id="result">Your Color</span>
+
+
+<br>
+<input id="red" onchange= "changeboxcolor(this)" class="color-slider" type="range" min="0" max="255"><br>
+<input id="green" onchange= "changeboxcolor(this)" class="color-slider" type="range" min="0" max="255"><br>
+<input id="blue" onchange= "changeboxcolor(this)" class="color-slider" type="range" min="0" max="255"><br>
+<br>
+<div style= "position: absolute; top: 0; left: 200; z-index: 0">
+<canvas id="myCanvas" width="2000" height="1000">
+Your browser does not support the HTML5 canvas tag.</canvas>
+</div>
+<script>
+
+var c = document.getElementById("myCanvas");
+var ctx = c.getContext("2d");
+// Create gradient
+var grd = ctx.createLinearGradient(0,0,200,0);
+grd.addColorStop(0,"red");
+grd.addColorStop(1,"blue");
+
+
+
+// Fill with gradient
+ctx.fillStyle = grd;
+ctx.fillRect(10,10,1500,800);
+
+
+</script>
